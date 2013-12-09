@@ -1,0 +1,30 @@
+{
+  "name": "book-loggly",
+  "version": "0.0.1",
+  "description": "loggly middleware for the book logging framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodeunit tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Rafflecopter/node-book-loggly"
+  },
+  "keywords": [
+    "book",
+    "middleware",
+    "logging",
+    "log",
+    "loggly"
+  ],
+  "author": "Jon Eisen <jon@metricfeat.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rafflecopter/node-book-loggly/issues"
+  },
+  "homepage": "https://github.com/Rafflecopter/node-book-loggly",
+  "dependencies": {
+    "xtend": "~2.1.1",
+    "loggly": "~1.0.3"
+  }
+}
