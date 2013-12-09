@@ -10,7 +10,7 @@ var loggly = require('loggly')
 
 // level is a numeric value for book from [0, 5]
 // panic, error, warning, info, debug, trace
-var levels = ['fatal', 'error', 'warning', 'info', 'debug', 'trace'];
+var levels = ['panic', 'error', 'warning', 'info', 'debug', 'trace'];
 
 module.exports = function(config) {
     var ignore_levels = config.ignore_levels || 4;
