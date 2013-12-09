@@ -2,6 +2,8 @@
 
 [loggly](http://loggly.com) middleware for the [book](https://github.com/defunctzombie/node-book) logging framework.
 
+This middleware is shamelessly copy/modified from [book-raven](https://github.com/defunctzombie/node-book-raven).
+
 ## Install
 
 ```
