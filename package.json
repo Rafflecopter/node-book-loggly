@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/Rafflecopter/node-book-loggly",
   "dependencies": {
-    "xtend": "~2.1.1",
-    "loggly": "~1.0.3"
+    "xtend": "~2.1.1"
   }
 }
