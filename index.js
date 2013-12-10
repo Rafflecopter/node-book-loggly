@@ -15,6 +15,10 @@ module.exports = function(logglyClient, options) {
     options = options || {};
     var ignore_levels = options.ignore_levels || 4;
 
+    if (!logglyClient.json) {
+        throw new Error('JSON must be enabled on the loggly client!')
+    }
+
     return logglyMiddleware;
 
     function logglyMiddleware () {
@@ -34,6 +38,7 @@ module.exports = function(logglyClient, options) {
 
         var extra = extend({}, self);
         delete extra.level;
+        delete extra.message;
 
         // add our fields to the message
         var packet = extend({
@@ -75,6 +80,7 @@ module.exports = function(logglyClient, options) {
             packet.isError = true;
         }
 
+        console.log('loggly', packet)
         logglyClient.log(packet, function (err) {
             // Use uncaughtException to catch these errors
             throw err
