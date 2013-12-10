@@ -36,17 +36,13 @@ module.exports = function(logglyClient, options) {
         delete extra.level;
 
         // add our fields to the message
-        var packet = {
+        var packet = extend({
             isError: false,
             message: self.message,
             extra: extra,
             level_code: self.level,
             level: lvl
-        };
-
-        if (options.from) {
-            packet.from = config.from
-        }
+        }, options.from);
 
         for (var idx=0 ; idx < arguments.length ; ++idx) {
             var arg = arguments[idx];
