@@ -83,7 +83,9 @@ module.exports = function(logglyClient, options) {
         console.log('loggly', packet)
         logglyClient.log(packet, function (err) {
             // Use uncaughtException to catch these errors
-            throw err
+            if (err) {
+                throw err
+            }
         });
     }
 }
