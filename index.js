@@ -6,19 +6,18 @@ var http = require('http');
 
 // vendor
 var extend = require('xtend')
-var loggly = require('loggly')
 
 // level is a numeric value for book from [0, 5]
 // panic, error, warning, info, debug, trace
 var levels = ['panic', 'error', 'warning', 'info', 'debug', 'trace'];
 
-module.exports = function(config) {
-    var ignore_levels = config.ignore_levels || 4;
+module.exports = function(logglyClient, options) {
+    options = options || {};
+    var ignore_levels = options.ignore_levels || 4;
 
-    config.json = true
-    var client = loggly.createClient(config)
+    return logglyMiddleware;
 
-    return function() {
+    function logglyMiddleware () {
         var self = this;
 
         // default is error
@@ -44,6 +43,10 @@ module.exports = function(config) {
             level_code: self.level,
             level: lvl
         };
+
+        if (options.from) {
+            packet.from = config.from
+        }
 
         for (var idx=0 ; idx < arguments.length ; ++idx) {
             var arg = arguments[idx];
@@ -76,7 +79,7 @@ module.exports = function(config) {
             packet.isError = true;
         }
 
-        client.log(packet, function (err) {
+        logglyClient.log(packet, function (err) {
             // Use uncaughtException to catch these errors
             throw err
         });

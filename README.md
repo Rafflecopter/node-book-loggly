@@ -15,19 +15,20 @@ npm install book book-loggly --save
 ```javascript
 var log = require('book').default();
 
-var logglyConfig = {
-  "token": "your-really-long-token-you-got-when-you-created-an-http-input",
-  "subdomain": "your-subdomain",
-  "auth": {
-    "username": "your-username",
-    "password": "your-password"
-  },
+var logglyClient = require('loggly').createClient(myLogglyConfig);
+
+var bookLogglyOptions = {
   // A custom book-loggly option to ignore logs at ignore_levels and above
   // 0: panic, 1: error, 2: warning, 3: info, 4: debug (default), 5: trace
-  "ignore_levels": log.TRACE
+  "ignore_levels": log.TRACE,
+
+  // An (optional) arbitrary object to add to the log event to notify where its coming from
+  "from": {
+    "instance-id": "123"
+  }
 };
 
-log.use(require('book-loggly')(logglyConfig));
+log.use(require('book-loggly')(logglyClient, bookLogglyOptions));
 
 
 // Now just log as usual
@@ -49,6 +50,9 @@ log.error(new Error("test error!"))
   "extra": {
     "extra_parameters": "that were added by other middleware",
     "object fields": "from objects passed into the log function"
+  },
+  "from": {
+    "static-information": "from options.from"
   }
 }
 ```
