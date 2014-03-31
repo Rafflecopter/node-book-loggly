@@ -1,6 +1,6 @@
 {
   "name": "book-loggly",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "loggly middleware for the book logging framework",
   "main": "index.js",
   "scripts": {
